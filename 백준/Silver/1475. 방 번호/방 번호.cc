@@ -1,30 +1,35 @@
 #include <iostream>
 #include <vector>
-#include <string>
 #include <algorithm>
+#include <string>
+
 using namespace std;
 
-int main() {
-    vector<int> freq(10, 0);
+int main()
+{
+	vector<int> freq(10);
+	
+	int N;
+	cin >> N;
 
-    int N;
-    cin >> N;
+	string input = to_string(N);
 
-    string s = to_string(N);
-    for (char c : s) {
-        freq[c - '0']++;
-    }
+	for (auto e : input)
+	{
+		freq[e - '0']++;
+	}
 
-    // 6과 9 합쳐서 처리
-    int sixNine = freq[6] + freq[9];
-    freq[6] = freq[9] = (sixNine + 1) / 2;  
+	int res = 0;
+	int sixnine = freq[6] + freq[9];
 
-    // 전체 freq에서 최댓값 찾기
-    int res = 0;
-    for (int i = 0; i < 10; i++) {
-        res = max(res, freq[i]);
-    }
+	freq[6] = freq[9] = (sixnine + 1) / 2;
 
-    cout << res << "\n";
-    return 0;
+	for (int i = 0; i < 10; i++)
+	{
+		res = max(freq[i], res);
+	}
+
+	cout << res;
+
+	return 0;
 }
