@@ -1,52 +1,50 @@
 #include <iostream>
 #include <algorithm>
-#include <list>
-#include <vector>
-#include <string>
 #include <stack>
 
 using namespace std;
 
-int main(void)
+int main()
 {
-	int numOfcommand;
-	cin >> numOfcommand;
-	stack<int> S;
+	int N;
+	cin >> N;
 
-	for (int i = 0; i < numOfcommand; i++)
+	stack<int> s;
+
+	for (int i = 0; i < N; i++)
 	{
-		string command;
-		cin >> command;
-		cin.ignore();
+		string cmd;
+		cin >> cmd;
 
-		if (command == "push")
+		if (cmd == "push")
 		{
 			int num;
 			cin >> num;
-			S.push(num);
+			s.push(num);
 		}
-		if (command == "pop")
+		else if (cmd == "pop")
 		{
-			if (!S.empty())
-			{
-				cout << S.top() << '\n';
-				S.pop();
+			if (s.empty()) cout << -1 << "\n";
+			else {
+				cout << s.top() << "\n";
+				s.pop();
 			}
-			else cout << -1 << '\n';
 		}
-		if (command == "size")
+		else if (cmd == "size")
 		{
-			cout << S.size() << '\n';
+			cout << s.size() << "\n";
 		}
-		if (command == "empty")
+		else if (cmd == "empty")
 		{
-			if (S.empty()) cout << 1 << '\n';
-			else cout << 0 << '\n';
+			if (s.empty()) cout << 1 << "\n";
+			else cout << 0 << "\n";
 		}
-		if (command == "top")
+		else if (cmd == "top")
 		{
-			if (!S.empty()) cout << S.top() << '\n';
-			else cout << -1 << '\n';
+			if (s.empty()) cout << -1 << "\n";
+			else cout << s.top() << "\n";
 		}
 	}
+
+	return 0;
 }
