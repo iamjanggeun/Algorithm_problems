@@ -1,30 +1,31 @@
+// 1주 후 복습
 #include <iostream>
-#include <queue>
 #include <algorithm>
+#include <queue>
 #define X first
 #define Y second
-
 using namespace std;
 
-int board[5002][5002];
-int dist[5002][5002];
+int n, m;
+int board[1001][1001];
+int dist[1001][1001];
 int dx[4] = { 1, 0, -1, 0 };
 int dy[4] = { 0, 1, 0, -1 };
-int m, n;
 
-
-//bfs를 동시에 돌리면 쌉가능;;
 int main()
 {
 	ios::sync_with_stdio(0);
 	cin.tie(0);
 
 	cin >> m >> n;
+	int ans = 0;
+
 	queue<pair<int, int>> Q;
+
 	for (int i = 0; i < n; i++) {
 		for (int j = 0; j < m; j++) {
 			cin >> board[i][j];
-			if (board[i][j] == 1) Q.push({i, j});
+			if (board[i][j] == 1) Q.push({ i, j });
 			if (board[i][j] == 0) dist[i][j] = -1;
 		}
 	}
@@ -40,11 +41,10 @@ int main()
 			if (dist[nx][ny] >= 0) continue;
 
 			dist[nx][ny] = dist[cur.X][cur.Y] + 1;
+			ans = max(ans, dist[nx][ny]);
 			Q.push({ nx, ny });
 		}
 	}
-
-	int ans = 0;
 
 	for (int i = 0; i < n; i++) {
 		for (int j = 0; j < m; j++) {
@@ -52,8 +52,8 @@ int main()
 				cout << -1;
 				return 0;
 			}
-			ans = max(ans, dist[i][j]);
 		}
-	}
+	}           
 	cout << ans;
+	return 0;
 }
