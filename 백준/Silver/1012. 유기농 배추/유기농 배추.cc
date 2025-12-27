@@ -1,40 +1,39 @@
+//1주 후 복습
 #include <iostream>
-#include <queue>
 #include <algorithm>
+#include <queue>
 #define X first
 #define Y second
-
 using namespace std;
 
-int board[502][502];
-int vis[502][502];
 int dx[4] = { 1, 0, -1, 0 };
 int dy[4] = { 0, 1, 0, -1 };
+int board[51][51];
+int vis[51][51];
+int n, m, k;
 
 int main()
 {
-	int T;
-	cin >> T;
+	int tc;
+	cin >> tc;
 
-	for (int tc = 0; tc < T; tc++)
+	while (tc--)
 	{
-		int m, n, k;
+		int num = 0;
 		cin >> m >> n >> k;
 
-		for (int i = 0; i < m; i++) fill(board[i], board[i] + n, 0);
-		for (int i = 0; i < m; i++) fill(vis[i], vis[i] + n, 0);
+		for (int i = 0; i < n; i++) fill(board[i], board[i] + m, 0);
+		for (int i = 0; i < n; i++) fill(vis[i], vis[i] + m, 0);
 
 		for (int i = 0; i < k; i++) {
 			int x, y;
 			cin >> x >> y;
-			board[x][y] = 1;
+			board[y][x] = 1;
 		}
 
-		int num = 0;
-
-		for (int i = 0; i < m; i++) {
-			for (int j = 0; j < n; j++) {
-				if (vis[i][j] || board[i][j] != 1) continue;
+		for (int i = 0; i < n; i++) {
+			for (int j = 0; j < m; j++) {
+				if (board[i][j] == 0 || vis[i][j]) continue;
 				num++;
 				queue<pair<int, int>> Q;
 				vis[i][j] = 1;
@@ -47,9 +46,8 @@ int main()
 					{
 						int nx = cur.X + dx[dir];
 						int ny = cur.Y + dy[dir];
-						if (nx < 0 || nx >= m || ny < 0 || ny >= n) continue;
-						if (vis[nx][ny] || board[nx][ny] != 1) continue;
-
+						if (nx < 0 || nx >= n || ny < 0 || ny >= m) continue;
+						if (vis[nx][ny] || board[nx][ny] == 0) continue;
 						vis[nx][ny] = 1;
 						Q.push({ nx, ny });
 					}
