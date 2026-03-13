@@ -1,38 +1,35 @@
 #include <iostream>
+#include <algorithm>
 #include <string>
-#include <vector>
 #include <map>
 #include <cctype>
-
+#include <stdlib.h>
 using namespace std;
-string num_to_name[100004];
-map<string, int> name_to_num;
+
+string arr[100001];
+map<string, int> mp;
 
 int main() {
+
     ios::sync_with_stdio(0);
     cin.tie(0);
 
     int n, m;
     cin >> n >> m;
 
-    for (int i = 1; i <= n; i++) {
-        string name;
-        cin >> name;
-        
-        num_to_name[i] = name;
-        name_to_num[name] = i;
+    for(int i = 1; i <= n; i++) {
+        string str;
+        cin >> str;
+        arr[i] = str;
+        mp[str] = i;
     }
 
-    for (int i = 0; i < m; i++) {
-        string query;
-        cin >> query;
+    for(int i = 0; i < m; i++) {
+        string str;
+        cin >> str;
 
-        if (isdigit(query[0])) {
-            int num = stoi(query);
-            cout << num_to_name[num] << "\n";
-        } else {
-            cout << name_to_num[query] << "\n";
-        }
+        if(isdigit(str[0])) cout << arr[stoi(str)] << "\n";
+        else cout << mp[str] << "\n";
     }
 
     return 0;
