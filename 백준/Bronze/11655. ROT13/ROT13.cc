@@ -1,22 +1,24 @@
 #include <iostream>
 #include <algorithm>
 #include <string>
+#include <cctype>
 using namespace std;
 
-//A = 65, a = 97, Z = 90, z = 122
+int freq[26];
 
-int main()
-{
+int main() {
+
     ios::sync_with_stdio(0);
     cin.tie(0);
-    string s;
-    getline(cin, s);
 
-    for(int i = 0; i < s.size(); i++) {
-        if(s[i] >= 'A' && s[i] <= 'Z') s[i] = (s[i] - 'A' + 13)%26 + 'A';
-        else if (s[i] >= 'a' && s[i] <= 'z') s[i] = (s[i] - 'a' + 13)%26 + 'a';
+    string str;
+    getline(cin, str);
+
+    for(int i = 0; i < str.size(); i++) {
+        if(str[i] >= 'a' && str[i] <= 'z') str[i] = (str[i] - 'a' + 13) % 26 + 'a';
+        else if(str[i] >= 'A' && str[i] <= 'Z') str[i] = (str[i] - 'A' + 13) % 26 + 'A';
     }
 
-    for(auto e : s) cout << e;
+    cout << str;
     return 0;
 }
