@@ -3,7 +3,8 @@
 * Date:              2026-03-28
 * Project Name:      Algorithm Study
 * Problem Name:      BOJ 12869 - 뮤탈리스크
-* Description:       BFS
+* Description:       - BFS
+                     - 배열 치기 귀찮아서 next_permutation 사용
 *********************************************************************/
 
 #include <iostream>
