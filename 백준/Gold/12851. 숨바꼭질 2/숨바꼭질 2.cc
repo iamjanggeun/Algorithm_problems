@@ -1,44 +1,37 @@
 #include <iostream>
 #include <queue>
 #include <algorithm>
+#include <vector>
 using namespace std;
 
+int n, m;
 int dist[100001];
-long long route[100001]; 
-int n, k;
+int cnt[100001];
 
 int main() {
     ios::sync_with_stdio(0);
     cin.tie(0);
 
-    cin >> n >> k;
-
+    cin >> n >> m;
     fill(dist, dist + 100001, -1);
-
-    dist[n] = 0;
-    route[n] = 1; 
-    
     queue<int> Q;
+    dist[n] = 0;
+    cnt[n] = 1;
     Q.push(n);
 
     while(!Q.empty()) {
-        int cur = Q.front(); 
-        Q.pop();
-
-        for(int next : {cur + 1, cur - 1, cur * 2}) {
-            if(next < 0 || next > 100000) continue;
-
+        auto cur = Q.front(); Q.pop();
+        for(int next : {cur - 1, cur + 1, 2 * cur}) {
+            if(next < 0 || next >= 100001) continue;
+            
             if(dist[next] == -1) {
                 dist[next] = dist[cur] + 1;
-                route[next] = route[cur];
+                cnt[next] = cnt[cur];
                 Q.push(next);
             }
-            else if(dist[next] == dist[cur] + 1) {
-                route[next] += route[cur]; 
-            }
+            else if(dist[next] == dist[cur] + 1) cnt[next] += cnt[cur];
         }
     }
-
-    cout << dist[k] << "\n" << route[k];
+    cout << dist[m] << "\n" << cnt[m];
     return 0;
 }
