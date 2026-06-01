@@ -9,7 +9,6 @@ int freq[32];
 int solution(int n, vector<int> lost, vector<int> reserve) {
     int answer = 0;
 
-    //1. freq 배열 채우기
     fill(freq, freq + 32, 1);
     for(auto e : reserve) freq[e - 1] = 2;
     for(auto e : lost) {
