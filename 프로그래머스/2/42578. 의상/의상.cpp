@@ -1,16 +1,16 @@
-#include <string>
-#include <vector>
+#include <iostream>
+#include <algorithm>
 #include <unordered_map>
-
+#include <vector>
+#include <string>
 using namespace std;
 
 int solution(vector<vector<string>> clothes) {
-    int answer = 1;
+    int ans = 1;
     unordered_map<string, int> mp;
+    for(const auto& e : clothes) mp[e[1]]++;
     
-    for(auto e : clothes) mp[e[1]]++;
-    for(auto e : mp) answer *= e.second + 1;
-    answer--;
+    for(const auto& e : mp) ans *= e.second + 1;
     
-    return answer;
+    return ans - 1;
 }
