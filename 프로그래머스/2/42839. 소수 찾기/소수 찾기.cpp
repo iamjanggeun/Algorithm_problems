@@ -2,33 +2,35 @@
 #include <algorithm>
 #include <string>
 #include <vector>
-#include <set>
+#include <unordered_set>
+#include <stdlib.h>
 using namespace std;
 
-set<int> numList;
-vector<int> answers;
-
-bool isPrime(int n) {
-    if(n <= 1) return false;
-    if(n == 2) return true;
-    for(int i = 2; i * i <= n; i++) {
-        if(n % i == 0) return false;
+bool isPrime(int num) {
+    if(num < 2) return false;
+    for(int i = 2; i*i <= num; i++) {
+        if(num % i == 0) return false;
     }
     return true;
 }
 
-void recursive(string combination, string candidate) {
-    if(combination != "") numList.insert(stoi(combination));
-
-    for(int i = 0; i < candidate.size(); i++) {
-        recursive(combination + candidate[i], candidate.substr(0, i) + candidate.substr(i + 1));
-    }
-}
-
 int solution(string numbers) {
-    recursive("", numbers);
     int answer = 0;
-    for(auto e : numList) if(isPrime(e)) answers.push_back(e);
-    answer = answers.size();
+    unordered_set<int> candidate_nums;
+
+    sort(numbers.begin(), numbers.end());
+
+    do {
+        for(int len = 1; len <= numbers.length(); len++) {
+            int num = stoi(numbers.substr(0, len));
+            candidate_nums.insert(num);
+        }
+    } while(next_permutation(numbers.begin(), numbers.end()));
+
+    for(auto& e : candidate_nums) {
+        if(isPrime(e)) answer++;
+    }
+
     return answer;
 }
+
