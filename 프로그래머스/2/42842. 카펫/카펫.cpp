@@ -1,20 +1,19 @@
-#include <string>
-#include <vector>
-#include <algorithm>
 #include <iostream>
+#include <algorithm>
+#include <vector>
 #include <cmath>
 using namespace std;
 
 vector<int> solution(int brown, int yellow) {
     vector<int> answer;
-    int space = brown + yellow;
+    int area = brown + yellow;
 
-    for(int height = 3; height <= sqrt(space); height++) {
-        if(space % height == 0) {
-            int row = space / height;
-            if((row + height) * 2 - 4 == brown) {
+    for(int col = 3; col <= sqrt(area); col++) {
+        if(area % col == 0) {
+            int row = area / col;
+            if(2*(row + col) - 4 == brown) {
                 answer.push_back(row);
-                answer.push_back(height);
+                answer.push_back(col);
             }
         }
     }
@@ -22,10 +21,18 @@ vector<int> solution(int brown, int yellow) {
 }
 
 int main() {
-    int a = 24;
-    int b = 24;
+    ios::sync_with_stdio(0);
+    cin.tie(0);
 
-    for(auto e : solution(a, b)) {
+    int b = 24;
+    int y = 24;
+
+    vector<int> res = solution(b, y);
+    for(auto& e : res) {
         cout << e << " ";
     }
+
+    return 0;
 }
+
+
