@@ -1,21 +1,17 @@
-#include <iostream>
-#include <string>
-#include <algorithm>
-#include <stdlib.h>
-#include <unordered_set>
+#include <bits/stdc++.h>
 using namespace std;
 
-bool isPrime(int n) {
-    if(n < 2) return false;
-    for(int i = 2; i*i <= n; i++) {
-        if(n % i == 0) return false;
+bool isPrime(int num) {
+    if(num < 2) return false;
+    for(int i = 2; i * i <= num; i++) {
+        if(num % i == 0) return false;
     }
     return true;
 }
 
 int solution(string numbers) {
-    unordered_set<int> numList;
-    int answer = 0;
+    int ans = 0;
+    unordered_set <int> numList;
     sort(numbers.begin(), numbers.end());
     
     do {
@@ -26,8 +22,8 @@ int solution(string numbers) {
     } while(next_permutation(numbers.begin(), numbers.end()));
     
     for(auto& e : numList) {
-        if(isPrime(e)) answer++;
+        if(isPrime(e)) ans++;
     }
     
-    return answer;
+    return ans;
 }
