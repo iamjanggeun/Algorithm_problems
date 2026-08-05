@@ -1,27 +1,21 @@
 #include <iostream>
-#include <string>
 #include <vector>
 #include <algorithm>
-
 using namespace std;
 
 int solution(int k, vector<vector<int>> dungeons) {
-    int answer = -1;
-
+    int answer = 0;
     sort(dungeons.begin(), dungeons.end());
-    do {
-        int cnt = 0;
-        int temp = k;
 
-        for(int i = 0; i < dungeons.size(); i++) {
-            if(temp >= dungeons[i][0]) {
-                cnt++;
-                temp -= dungeons[i][1];
-            }
-            else break;
+    do {
+        int temp = k;
+        int cnt = 0;
+        for(auto e : dungeons) {
+            if(temp < e[0]) break;
+            temp -= e[1];
+            cnt++;
         }
         answer = max(answer, cnt);
-        if(answer == dungeons.size()) return answer;
     } while(next_permutation(dungeons.begin(), dungeons.end()));
 
     return answer;
