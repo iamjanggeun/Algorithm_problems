@@ -23,26 +23,25 @@ int solution(vector<vector<int>> jobs) {
     
     int time = 0;
     int totTime = 0;
-    int jobIndex = 0;
     int count = 0;
     int n = jobs.size();
+    int idx = 0;
     
     while(count < n) {
-        while(jobIndex < n && jobs[jobIndex][0] <= time) {
-            pq.push({jobs[jobIndex][1], jobs[jobIndex][0], jobIndex});
-            jobIndex++;
+        while(idx < n && jobs[idx][0] <= time) {
+            pq.push({jobs[idx][1], jobs[idx][0], idx});
+            idx++;
         }
         
         if(!pq.empty()) {
-            Work cur = pq.top();
+            auto cur = pq.top();
             pq.pop();
             
             time += cur.duration;
-            totTime += (time - cur.createdAt);
+            totTime += time - cur.createdAt;
             count++;
         }
-        else time = jobs[jobIndex][0];
+        else time = jobs[idx][0];
     }
-    
     return totTime / n;
 }
