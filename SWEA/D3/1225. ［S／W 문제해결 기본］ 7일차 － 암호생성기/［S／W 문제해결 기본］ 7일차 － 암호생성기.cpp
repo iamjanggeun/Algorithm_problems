@@ -1,54 +1,46 @@
-#include <iostream>
-#include <algorithm>
-#include <queue>
-
+#include <bits/stdc++.h>
 using namespace std;
 
-int main()
-{
-	for (int i = 0; i < 10; i++)
-	{
-		int N;
-		cin >> N;
-
-		int sub = 1;
-
-		queue<int> q;
-
-		for (int j = 0; j < 8; j++)
-		{
-			int x;
-			cin >> x;
-			q.push(x);
-		}
-
-		while (1)
-		{
-			int x;
-			x = q.front();
-			q.pop();
-
-			x -= sub;
-
-			if (x <= 0)
-			{
-				q.push(0);
-				break;
-			}
-
-			q.push(x);
-
-			sub++;
-			if (sub > 5) sub = 1;
-		}
-
-		cout << "#" << i + 1;
-		for (int k = 0; k < 8; k++)
-		{
-			cout << " " << q.front();
-			q.pop();
-		}
-		cout << "\n";
-	}
-	return 0;
+int main() {
+    for(int T = 1; T <= 10; T++) {
+        int tc;
+        cin >> tc;
+        
+        queue<int> Q;
+        int num;
+        
+        for(int i = 0; i < 8; i++) {
+            cin >> num;
+        	Q.push(num);
+        }
+        
+        int cnt = 1;
+        
+        while(1) {
+        	int temp = Q.front();
+            Q.pop();
+            
+            temp -= cnt;
+            
+            if(temp <= 0) {
+            	Q.push(0);
+                break;
+            }
+            
+            Q.push(temp);
+            cnt++;
+            
+            if(cnt > 5) cnt = 1;
+        }
+        
+        cout << "#" << tc << " ";
+        
+        while(!Q.empty()) {
+        	cout << Q.front() << " ";
+            Q.pop();
+        }
+        
+        cout << "\n";
+    } 
+    return 0;
 }
